@@ -12,7 +12,7 @@ export const servicesData: Service[] = [
         slug: 'general-physiotherapy',
         title: 'General Physiotherapy',
         heroTitle: 'General Physiotherapy',
-        heroImage: '/service-img-2.jpg',
+        heroImage: '/service-img-2.png',
         description: `Our Physiotherapists are experts in movement and function who work in partnership with their patients, assisting them to overcome movement disorders, which may have been present from birth, acquired through accident or injury, or are the result of ageing or life-changing events.
         
 At Revix Physiotherapy, we use only individually tailored approach. Our Physiotherapist are thorough with assessment, diagnosis, and treatment which is client centric and based on evidences in research. The aim of our physiotherapy service is to aid in one’s recovery and maximise their potential for healing, helping them to return to sport or optimal daily function as soon as is possible. Our Physios pride themselves in their hands on, evidence based approach to physiotherapy treatment, support, education and exercise prescription and go beyond just treating a single injury.
