@@ -147,7 +147,7 @@ export default function ContactPage() {
                                 <Phone className="h-6 w-6 text-primary" />
                                 <div>
                                     <p className="text-sm text-muted-foreground">Call us</p>
-                                    <p className="font-medium">+92 300 1234567</p>
+                                    <p className="font-medium">+923251510459</p>
                                 </div>
                             </div>
                         </div>

@@ -19,12 +19,12 @@ export async function generateStaticParams() {
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
-    
+
     const { data } = await supabase
         .from('services')
         .select('slug')
         .eq('is_active', true);
-        
+
     return (data ?? []).map(({ slug }) => ({ slug }));
 }
 
@@ -153,7 +153,7 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
                                         Speak with our patient care coordinator for personalized assistance.
                                     </p>
                                     <a
-                                        href="tel:+923105404199"
+                                        href="tel:+923251510459"
                                         className="inline-flex items-center justify-center w-full bg-white text-cyan-700 font-bold py-3 px-6 rounded-lg hover:bg-cyan-50 transition-all duration-300 shadow-md relative z-10"
                                     >
                                         Call Us Now

@@ -10,7 +10,7 @@ export default async function Footer() {
     const globalData = {
         companyName: 'Revix Physiotherapy',
         description: 'Revix Physiotherapy is a trusted physiotherapy and allied health service provider to aged care centres.',
-        phone: '+92 310 5404199',
+        phone: '+92 325 1510459',
         email: 'info@revixphysiotherapy.com',
         address: 'Office #10, 2nd Floor, Al-Anayat Mall, G-11 Markaz, Islamabad',
         googleMapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3321.30825345712!2d72.9961633!3d33.68442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbe29048f8899%3A0x6b97f35a092822a1!2sG-11%20Markaz%20Islamabad!5e0!3m2!1sen!2spk!4v1628122394593!5m2!1sen!2spk',

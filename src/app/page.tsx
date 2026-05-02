@@ -13,7 +13,7 @@ export default function Home() {
     image: 'https://revixphysiotherapy.com/revix1.png',
     '@id': 'https://revixphysiotherapy.com',
     url: 'https://revixphysiotherapy.com',
-    telephone: '+923105404199',
+    telephone: '+923251510459',
     address: {
       '@type': 'PostalAddress',
       streetAddress: '123 Health Ave',

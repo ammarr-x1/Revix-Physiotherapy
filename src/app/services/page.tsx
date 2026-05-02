@@ -20,7 +20,7 @@ export default async function ServicesPage() {
             <section className="relative overflow-hidden bg-white">
                 {/* Background shape */}
                 <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-blue-50"></div>
-                
+
                 <div className="container mx-auto px-6 lg:px-12 py-16 lg:py-24 relative z-10">
                     <div className="max-w-3xl">
                         <span className="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-800 text-sm font-bold rounded-full mb-6 uppercase tracking-wider">
@@ -47,8 +47,8 @@ export default async function ServicesPage() {
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
                             {services.map((service) => (
-                                <div 
-                                    key={service.slug} 
+                                <div
+                                    key={service.slug}
                                     className="group bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                                 >
                                     <div className="relative w-full aspect-[16/10] overflow-hidden">
@@ -61,7 +61,7 @@ export default async function ServicesPage() {
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                                     </div>
-                                    
+
                                     <div className="p-8 flex-grow">
                                         <h2 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-cyan-600 transition-colors">
                                             {service.title}
@@ -69,9 +69,9 @@ export default async function ServicesPage() {
                                         <p className="text-gray-600 leading-relaxed mb-8 line-clamp-3">
                                             {service.description}
                                         </p>
-                                        
+
                                         <div className="mt-auto pt-6 border-t border-gray-50">
-                                            <Link 
+                                            <Link
                                                 href={`/services/${service.slug}`}
                                                 className="inline-flex items-center text-cyan-600 font-bold hover:text-cyan-700 transition-colors"
                                             >
@@ -106,17 +106,17 @@ export default async function ServicesPage() {
                         Our specialists are here to help. Contact us today for a consultation and we'll help you find the best path to recovery.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                        <Link 
-                            href="/contact" 
+                        <Link
+                            href="/contact"
                             className="bg-cyan-500 text-white px-10 py-4 rounded-full font-bold shadow-xl hover:bg-cyan-400 transition-all duration-300 transform hover:scale-105"
                         >
                             Schedule Consultation
                         </Link>
-                        <a 
-                            href="tel:+923105404199" 
+                        <a
+                            href="tel:+923251510459"
                             className="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-10 py-4 rounded-full font-semibold hover:bg-white hover:text-[#004d4d] transition-all duration-300"
                         >
-                            Call +92 310 5404199
+                            Call +92 325 1510459
                         </a>
                     </div>
                 </div>

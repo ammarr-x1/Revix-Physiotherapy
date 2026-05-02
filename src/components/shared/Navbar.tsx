@@ -156,7 +156,7 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                     </Link>
 
                     {/* Hamburger Toggle */}
-                    <button 
+                    <button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         className="md:hidden p-2 text-gray-600 hover:text-cyan-600 transition-colors"
                         aria-label="Toggle Menu"
@@ -172,7 +172,7 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                     </div>
                     <div className="flex items-center gap-2 hover:text-cyan-600 transition-colors">
                         <Phone size={16} />
-                        <a href="tel:+923105404199">+92 310 5404199</a>
+                        <a href="tel:+923251510459">+92 325 1510459</a>
                     </div>
                 </div>
             </div>
@@ -239,15 +239,15 @@ export default function Navbar({ conditions, services }: NavbarProps) {
             </div>
 
             {/* Mobile Menu Overlay */}
-            <div 
+            <div
                 className={`
                     fixed inset-0 z-40 bg-black/50 md:hidden transition-opacity duration-300
                     ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
                 `}
                 onClick={() => setMobileMenuOpen(false)}
             />
-            
-            <div 
+
+            <div
                 className={`
                     fixed top-0 right-0 z-50 h-full w-[80%] max-w-[300px] bg-white shadow-2xl md:hidden transition-transform duration-300 ease-in-out
                     ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
@@ -263,7 +263,7 @@ export default function Navbar({ conditions, services }: NavbarProps) {
 
                     <nav className="flex flex-col space-y-2 overflow-y-auto flex-grow pb-8">
                         {menuItems.map((item) => (
-                            <Link 
+                            <Link
                                 key={item.href}
                                 href={item.href}
                                 className={`py-3 px-4 rounded-lg font-medium transition-colors ${pathname === item.href ? 'bg-cyan-50 text-cyan-600' : 'text-gray-700 hover:bg-gray-50'}`}
@@ -274,7 +274,7 @@ export default function Navbar({ conditions, services }: NavbarProps) {
 
                         {/* Collapsible Services */}
                         <div className="py-2">
-                            <button 
+                            <button
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     setActiveMobileSection(activeMobileSection === 'services' ? null : 'services');
@@ -297,7 +297,7 @@ export default function Navbar({ conditions, services }: NavbarProps) {
 
                         {/* Collapsible Treatments */}
                         <div className="py-2">
-                            <button 
+                            <button
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     setActiveMobileSection(activeMobileSection === 'treatments' ? null : 'treatments');
@@ -320,7 +320,7 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                     </nav>
 
                     <div className="mt-auto pt-6 border-t border-gray-100 space-y-4">
-                        <a href="tel:+923105404199" className="flex items-center gap-3 py-3 px-4 bg-cyan-600 text-white rounded-xl font-bold justify-center shadow-lg hover:bg-cyan-700 transition-colors">
+                        <a href="tel:+923251510459" className="flex items-center gap-3 py-3 px-4 bg-cyan-600 text-white rounded-xl font-bold justify-center shadow-lg hover:bg-cyan-700 transition-colors">
                             <Phone size={20} />
                             Call Us Now
                         </a>
@@ -329,4 +329,4 @@ export default function Navbar({ conditions, services }: NavbarProps) {
             </div>
         </header>
     );
-}
+}

@@ -137,7 +137,7 @@ export default async function TreatableConditionPage({ params }: Props) {
                                         Call us for immediate assistance
                                     </p>
                                     <a
-                                        href="tel:+923105404199"
+                                        href="tel:+923251510459"
                                         className="inline-block bg-white text-cyan-600 font-semibold py-2 px-6 rounded-full hover:bg-gray-100 transition-colors text-sm"
                                     >
                                         Call Now
