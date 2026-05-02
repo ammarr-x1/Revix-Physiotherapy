@@ -214,10 +214,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
+  /* Removed smooth scrolling to fix Next.js router conflict */
 
   /* Better text rendering */
   body {

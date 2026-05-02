@@ -20,6 +20,7 @@ export default function OurTeam() {
                         src={teamMember.imageSrc}
                         alt={teamMember.name}
                         fill
+                        sizes="(max-width: 640px) 192px, 256px"
                         className="object-cover"
                     />
                 </div>

@@ -15,6 +15,7 @@ export default function AboutUs() {
                         fill
                         className="object-cover object-center"
                         priority
+                        sizes="(max-width: 768px) 100vw, 50vw"
                     />
                 </div>
                 {/* Right Side: Text Content */}

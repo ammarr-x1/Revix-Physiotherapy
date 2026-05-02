@@ -7,26 +7,29 @@ import Link from 'next/link';
 import { Spotlight } from '@/components/ui/spotlight';
 import { BorderBeam } from '@/components/ui/border-beam';
 
+import { submitInquiry } from '@/app/actions/forms';
+
 export default function ContactPage() {
-    const [form, setForm] = useState({ name: '', email: '', message: '' });
     const [submitting, setSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        const form = e.currentTarget;
         e.preventDefault();
         setSubmitting(true);
+        setError(null);
 
-        console.log('Form submitted:', form);
+        const formData = new FormData(form);
+        const result = await submitInquiry(formData);
 
-        setTimeout(() => {
-            setSubmitting(false);
+        setSubmitting(false);
+        if (result.success) {
             setSubmitted(true);
-            setForm({ name: '', email: '', message: '' });
-        }, 1200);
+            form.reset();
+        } else {
+            setError(typeof result.error === 'string' ? result.error : 'Validation failed. Check your inputs.');
+        }
     };
 
     return (
@@ -70,9 +73,7 @@ export default function ContactPage() {
                                 <label className="block text-sm font-medium text-muted-foreground">Name</label>
                                 <input
                                     type="text"
-                                    name="name"
-                                    value={form.name}
-                                    onChange={handleChange}
+                                    name="full_name"
                                     required
                                     className="mt-2 w-full rounded-lg border border-border/30 bg-background/80 px-4 py-3 text-foreground shadow-inner focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none"
                                     placeholder="Enter your name"
@@ -84,8 +85,6 @@ export default function ContactPage() {
                                 <input
                                     type="email"
                                     name="email"
-                                    value={form.email}
-                                    onChange={handleChange}
                                     required
                                     className="mt-2 w-full rounded-lg border border-border/30 bg-background/80 px-4 py-3 text-foreground shadow-inner focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none"
                                     placeholder="Enter your email"
@@ -93,11 +92,19 @@ export default function ContactPage() {
                             </div>
 
                             <div>
+                                <label className="block text-sm font-medium text-muted-foreground">Subject (Optional)</label>
+                                <input
+                                    type="text"
+                                    name="subject"
+                                    className="mt-2 w-full rounded-lg border border-border/30 bg-background/80 px-4 py-3 text-foreground shadow-inner focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none"
+                                    placeholder="How can we help?"
+                                />
+                            </div>
+
+                            <div>
                                 <label className="block text-sm font-medium text-muted-foreground">Message</label>
                                 <textarea
                                     name="message"
-                                    value={form.message}
-                                    onChange={handleChange}
                                     rows={5}
                                     required
                                     className="mt-2 w-full rounded-lg border border-border/30 bg-background/80 px-4 py-3 text-foreground shadow-inner focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none"
@@ -114,6 +121,7 @@ export default function ContactPage() {
                                 <Send className="h-4 w-4" />
                             </button>
                             {submitted && <p className="mt-3 text-sm text-green-500">Thanks! We’ll be in touch shortly.</p>}
+                            {error && <p className="mt-3 text-sm text-red-500">{error}</p>}
                         </div>
                     </motion.form>
 

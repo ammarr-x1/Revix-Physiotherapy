@@ -3,44 +3,34 @@
 import { CalendarCheck } from 'lucide-react';
 import React, { useState } from 'react';
 
+import { submitAppointment } from '@/app/actions/forms';
+
 interface AppointmentFormProps {
     compact?: boolean;
 }
 
 export default function AppointmentForm({ compact = false }: AppointmentFormProps) {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [submissionStatus, setSubmissionStatus] = useState<null | 'success' | 'error'>(null);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-    const handleChange = (e: { target: { name: any; value: any; }; }) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
-
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        const form = e.currentTarget;
         e.preventDefault();
-        console.log('Form submitted with data:', formData);
+        setIsSubmitting(true);
+        setErrorMsg(null);
 
-        // Simulatng an API Call
-        setTimeout(() => {
+        const formData = new FormData(form);
+        const result = await submitAppointment(formData);
+
+        setIsSubmitting(false);
+        if (result.success) {
             setSubmissionStatus('success');
-
-            setFormData({
-                name: '',
-                email: '',
-                phone: '',
-                subject: '',
-                message: '',
-            });
-        }, 1500);
+            form.reset();
+        } else {
+            setSubmissionStatus('error');
+            setErrorMsg(typeof result.error === 'string' ? result.error : 'Please check your information and try again.');
+        }
     };
 
     // Compact version for sidebar use
@@ -70,64 +60,67 @@ export default function AppointmentForm({ compact = false }: AppointmentFormProp
                         <div>
                             <input
                                 type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
+                                name="patient_name"
                                 placeholder="Full Name"
                                 required
                                 className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-sm"
                             />
                         </div>
-                        <div>
+                        <div className="grid grid-cols-2 gap-3">
                             <input
                                 type="email"
                                 name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                placeholder="Email Address"
+                                placeholder="Email"
                                 required
                                 className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-sm"
                             />
-                        </div>
-                        <div>
                             <input
                                 type="tel"
                                 name="phone"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                placeholder="Phone Number"
+                                placeholder="Phone"
                                 required
                                 className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-sm"
                             />
                         </div>
                         <div>
-                            <input
-                                type="text"
-                                name="subject"
-                                value={formData.subject}
-                                onChange={handleChange}
-                                placeholder="Service Needed"
+                            <select 
+                                name="service_type" 
                                 required
-                                className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-sm"
+                                className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all text-sm"
+                            >
+                                <option value="">Select Service</option>
+                                <option value="Physiotherapy">Physiotherapy</option>
+                                <option value="Aged Care">Aged Care</option>
+                                <option value="NDIS">NDIS</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="text-xs text-gray-500 ml-1 mb-1 block">Preferred Date</label>
+                            <input
+                                type="date"
+                                name="preferred_date"
+                                required
+                                min={new Date().toISOString().split('T')[0]}
+                                className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all text-sm"
                             />
                         </div>
                         <div>
                             <textarea
                                 name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                placeholder="Brief description of your needs"
-                                required
-                                rows={3}
-                                className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all resize-none text-sm"
+                                placeholder="Any specific concerns?"
+                                rows={2}
+                                className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all resize-none text-sm"
                             />
                         </div>
                         <button
                             type="submit"
-                            className="w-full px-4 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 text-white font-semibold rounded-lg hover:from-cyan-700 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 text-sm shadow-md"
+                            disabled={isSubmitting}
+                            className="w-full px-4 py-3 bg-gradient-to-r from-cyan-600 to-teal-600 text-white font-semibold rounded-lg hover:from-cyan-700 hover:to-teal-700 transition-all duration-300 transform hover:scale-105 text-sm shadow-md disabled:opacity-50"
                         >
-                            Request Appointment
+                            {isSubmitting ? 'Sending Request...' : 'Request Appointment'}
                         </button>
+                        {errorMsg && <p className="text-xs text-red-500 text-center">{errorMsg}</p>}
                         <p className="text-xs text-gray-500 text-center mt-3">
                             We'll call you within 24 hours to confirm
                         </p>
@@ -172,63 +165,78 @@ export default function AppointmentForm({ compact = false }: AppointmentFormProp
                         ) : (
                             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="md:col-span-1">
+                                    <label className="text-sm font-medium text-gray-700 mb-1 block">Full Name</label>
                                     <input
                                         type="text"
-                                        name="name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        placeholder="Full Name"
+                                        name="patient_name"
+                                        placeholder="Enter your name"
                                         required
-                                        className="w-full p-4 rounded-xl bg-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
+                                        className="w-full p-4 rounded-xl bg-input text-foreground placeholder-muted-foreground border border-gray-200 focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
                                     />
                                 </div>
                                 <div className="md:col-span-1">
+                                    <label className="text-sm font-medium text-gray-700 mb-1 block">Email Address</label>
                                     <input
                                         type="email"
                                         name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        placeholder="Email Address"
+                                        placeholder="example@mail.com"
                                         required
-                                        className="w-full p-4 rounded-xl bg-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
+                                        className="w-full p-4 rounded-xl bg-input text-foreground placeholder-muted-foreground border border-gray-200 focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
                                     />
                                 </div>
                                 <div className="md:col-span-1">
+                                    <label className="text-sm font-medium text-gray-700 mb-1 block">Phone Number</label>
                                     <input
                                         type="tel"
                                         name="phone"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        placeholder="Phone Number"
+                                        placeholder="e.g., +61 400 000 000"
                                         required
-                                        className="w-full p-4 rounded-xl bg-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
+                                        className="w-full p-4 rounded-xl bg-input text-foreground placeholder-muted-foreground border border-gray-200 focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
                                     />
                                 </div>
                                 <div className="md:col-span-1">
-                                    <input
-                                        type="text"
-                                        name="subject"
-                                        value={formData.subject}
-                                        onChange={handleChange}
-                                        placeholder="Subject"
+                                    <label className="text-sm font-medium text-gray-700 mb-1 block">Service Required</label>
+                                    <select 
+                                        name="service_type" 
                                         required
-                                        className="w-full p-4 rounded-xl bg-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
+                                        className="w-full p-4 rounded-xl bg-input text-foreground border border-gray-200 focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
+                                    >
+                                        <option value="">Select a service</option>
+                                        <option value="Physiotherapy">Physiotherapy</option>
+                                        <option value="Massage Therapy">Massage Therapy</option>
+                                        <option value="Aged Care">Aged Care</option>
+                                        <option value="NDIS Support">NDIS Support</option>
+                                        <option value="Sports Injury">Sports Injury</option>
+                                    </select>
+                                </div>
+                                <div className="md:col-span-2">
+                                    <label className="text-sm font-medium text-gray-700 mb-1 block">Preferred Date</label>
+                                    <input
+                                        type="date"
+                                        name="preferred_date"
+                                        required
+                                        min={new Date().toISOString().split('T')[0]}
+                                        className="w-full p-4 rounded-xl bg-input text-foreground border border-gray-200 focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
                                     />
                                 </div>
-                                <textarea
-                                    name="message"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    placeholder="How can we help you?"
-                                    required
-                                    className="col-span-1 md:col-span-2 w-full p-4 rounded-xl bg-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300 min-h-[150px]"
-                                />
-                                <button
-                                    type="submit"
-                                    className="col-span-1 md:col-span-2 w-full px-8 py-4 bg-primary text-primary-foreground font-bold rounded-xl shadow-lg hover:bg-primary/90 transition-colors duration-300 transform hover:scale-105"
-                                >
-                                    Send Appointment Request
-                                </button>
+                                <div className="md:col-span-2">
+                                    <label className="text-sm font-medium text-gray-700 mb-1 block">Additional Message (Optional)</label>
+                                    <textarea
+                                        name="message"
+                                        placeholder="Tell us more about your needs..."
+                                        className="w-full p-4 rounded-xl bg-input text-foreground placeholder-muted-foreground border border-gray-200 focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300 min-h-[120px]"
+                                    />
+                                </div>
+                                <div className="md:col-span-2">
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="w-full px-8 py-4 bg-primary text-primary-foreground font-bold rounded-xl shadow-lg hover:bg-primary/90 transition-colors duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:transform-none"
+                                    >
+                                        {isSubmitting ? 'Processing Request...' : 'Send Appointment Request'}
+                                    </button>
+                                    {errorMsg && <p className="mt-4 text-center text-red-500 font-medium">{errorMsg}</p>}
+                                </div>
                             </form>
                         )}
                     </div>
