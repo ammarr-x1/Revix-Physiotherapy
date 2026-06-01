@@ -70,29 +70,34 @@ export default function AppointmentForm({ compact = false }: AppointmentFormProp
                             <input
                                 type="email"
                                 name="email"
-                                placeholder="Email"
+                                placeholder="youremail@gmail.com"
                                 required
                                 className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-sm"
                             />
                             <input
                                 type="tel"
                                 name="phone"
-                                placeholder="Phone"
+                                placeholder="+92 3000000000"
                                 required
                                 className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-sm"
                             />
                         </div>
                         <div>
-                            <select 
-                                name="service_type" 
+                            <select
+                                name="service_type"
                                 required
                                 className="w-full p-3 rounded-lg border border-gray-200 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all text-sm"
                             >
-                                <option value="">Select Service</option>
-                                <option value="Physiotherapy">Physiotherapy</option>
-                                <option value="Aged Care">Aged Care</option>
-                                <option value="NDIS">NDIS</option>
-                                <option value="Other">Other</option>
+                                <option value="">Select a service</option>
+                                <option value="Physiotherapy">Musculoskeletal & Sports Physiotherapy</option>
+                                <option value="Massage Therapy">Peadiatric Physiotherapy</option>
+                                <option value="Aged Care">Neurological Physiotherapy</option>
+                                <option value="NDIS Support">Cardiopulmonary Rehabilitation</option>
+                                <option value="Sports Injury">Women's Health Physiotherapy</option>
+                                <option value="Aged Care">Geriatric Physiotherapy</option>
+                                <option value="Aged Care">General Physiotherapy</option>
+                                <option value="Aged Care">Home Visit Physiotherapy</option>
+                                <option value="Aged Care">Dry Cupping</option>
                             </select>
                         </div>
                         <div>
@@ -189,24 +194,28 @@ export default function AppointmentForm({ compact = false }: AppointmentFormProp
                                     <input
                                         type="tel"
                                         name="phone"
-                                        placeholder="e.g., +61 400 000 000"
+                                        placeholder="e.g., +92 3000000000"
                                         required
                                         className="w-full p-4 rounded-xl bg-input text-foreground placeholder-muted-foreground border border-gray-200 focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
                                     />
                                 </div>
                                 <div className="md:col-span-1">
                                     <label className="text-sm font-medium text-gray-700 mb-1 block">Service Required</label>
-                                    <select 
-                                        name="service_type" 
+                                    <select
+                                        name="service_type"
                                         required
                                         className="w-full p-4 rounded-xl bg-input text-foreground border border-gray-200 focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300"
                                     >
                                         <option value="">Select a service</option>
-                                        <option value="Physiotherapy">Physiotherapy</option>
-                                        <option value="Massage Therapy">Massage Therapy</option>
-                                        <option value="Aged Care">Aged Care</option>
-                                        <option value="NDIS Support">NDIS Support</option>
-                                        <option value="Sports Injury">Sports Injury</option>
+                                        <option value="Physiotherapy">Musculoskeletal & Sports Physiotherapy</option>
+                                        <option value="Massage Therapy">Peadiatric Physiotherapy</option>
+                                        <option value="Aged Care">Neurological Physiotherapy</option>
+                                        <option value="NDIS Support">Cardiopulmonary Rehabilitation</option>
+                                        <option value="Sports Injury">Women's Health Physiotherapy</option>
+                                        <option value="Aged Care">Geriatric Physiotherapy</option>
+                                        <option value="Aged Care">General Physiotherapy</option>
+                                        <option value="Aged Care">Home Visit Physiotherapy</option>
+                                        <option value="Aged Care">Dry Cupping</option>
                                     </select>
                                 </div>
                                 <div className="md:col-span-2">

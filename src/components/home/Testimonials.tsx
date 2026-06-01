@@ -4,18 +4,18 @@ import { Quote } from 'lucide-react';
 export default function Testimonials() {
     const testimonials = [
         {
-            quote: "The team at Re-Fit Physiotherapy has been incredible. Their professional, compassionate care helped me recover from my injury faster than I ever thought possible. I can't recommend them enough!",
-            author: 'John P.',
+            quote: "I am regular at APT and I move and walk because of them. Dr Anas is young, strong and knowledgeable doctor. He has excellent sense of humor and is very very considerate. Worth visiting if you have mobility issues.",
+            author: 'Ayaz Khan',
 
         },
         {
-            quote: "My experience with Re-Fit was fantastic. The staff is knowledgeable and friendly, and they tailored a treatment plan that was perfect for my needs. I feel so much better now.",
-            author: 'Jane S.',
+            quote: "I am getting treated be DR. ANAS, I have 9 months of facial palsy. And I have been around the city and almost been in every physio care there is in Islamabad. Nobody could unwind the mystery but him, He knows how to handle the most complicated cases that even shifa couldn't. Results are amazing.",
+            author: 'Fahad Khan',
 
         },
         {
-            quote: "Excellent service and genuine care. My back pain has significantly improved, and I've learned so much about maintaining my health. Thank you for everything!",
-            author: 'Michael B.',
+            quote: "Went through physiotherapy sessions at Revix Physical Therapy Islamabad, and it was a truly wonderful experience. The therapy proved to be very effective and was extremely helpful in overcoming the issues resulting from my injury. Dr. Anas is a very humble and highly professional individual. I highly recommend Revix Physical Therapy for effective rehabilitation in Islamabad.",
+            author: 'Ahmed Zia',
 
         },
     ];

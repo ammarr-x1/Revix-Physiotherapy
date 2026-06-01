@@ -99,6 +99,7 @@ export default async function Footer() {
                     </div>
 
                     {/* Map & Address */}
+                    {/* 
                     <div>
                         <h4 className="text-lg font-bold text-white mb-6 relative inline-block">
                             Find Us
@@ -121,6 +122,7 @@ export default async function Footer() {
                             <span>{globalData.address}</span>
                         </div>
                     </div>
+                    */}
                 </div>
             </div>
 

@@ -4,7 +4,7 @@ import React from 'react';
 export default function OurTeam() {
     const teamMember = {
         name: 'Dr. Muhammad Anas Manzoor',
-        bio: `Dr. Anas is a dedicated and highly skilled physiotherapist with over 15 years of experience in helping patients regain movement and improve their quality of life. After completing his Bachelor's degree in Physiotherapy, he pursued a Master's degree in Sports and Musculoskeletal Physiotherapy. Dr. Anas is passionate about a holistic approach to patient care, combining evidence-based practices with a strong focus on personalized treatment plans. He is a member of the Australian Physiotherapy Association and is committed to staying at the forefront of his field through continuous professional development.`,
+        bio: `Dr. Anas is a dedicated and highly skilled physiotherapist with over 3 years of clinical experience in helping patients regain movement and improve their quality of life. After completing his Bachelor's degree in Physiotherapy, he pursued a Master's degree in Musculoskeletal Physiotherapy. Dr. Anas is passionate about a holistic approach to patient care, combining evidence-based practices with a strong focus on personalized treatment plans.`,
         imageSrc: '/pimage.jpeg',
     };
 

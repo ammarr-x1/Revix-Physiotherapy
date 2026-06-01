@@ -134,10 +134,10 @@ export default function Navbar({ conditions, services }: NavbarProps) {
             bg-background text-foreground border-b shadow-md z-50 transition-all duration-300
             ${scrolledState ? 'sticky top-0' : 'relative'}
         `}>
-            {/* Top Bar - Hidden on small mobile to save space */}
+            {/* Top Bar - Persistent on mobile and desktop */}
             <div
                 className={`container mx-auto flex flex-col md:flex-row items-center justify-between px-6 transition-all duration-300
-                ${scrolledState ? 'py-2 hidden md:flex' : 'py-4'}
+                ${scrolledState ? 'py-2 flex' : 'py-4'}
             `}
             >
                 <div className="flex items-center justify-between w-full md:w-auto">
@@ -262,7 +262,7 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                     </div>
 
                     <nav className="flex flex-col space-y-2 overflow-y-auto flex-grow pb-8">
-                        {menuItems.map((item) => (
+                        {menuItems.filter(item => item.name !== "Services").map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
@@ -319,7 +319,18 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                         </div>
                     </nav>
 
-                    <div className="mt-auto pt-6 border-t border-gray-100 space-y-4">
+                    <div className="mt-auto pt-6 border-t border-gray-100 space-y-3">
+                        <a 
+                            href="https://wa.me/923251510459" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex items-center gap-3 py-3 px-4 bg-emerald-600 text-white rounded-xl font-bold justify-center shadow-lg hover:bg-emerald-700 transition-colors"
+                        >
+                            <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.864-9.864.002-2.637-1.03-5.115-2.906-6.99C16.255 1.876 13.779 1.84 11.144 1.84 5.707 1.84 1.282 6.261 1.278 11.705c-.001 1.714.46 3.39 1.333 4.887L1.625 22.29l5.022-1.317zm11.503-4.757c-.292-.146-1.727-.853-1.993-.95-.266-.097-.46-.146-.653.146-.193.292-.748.95-.917 1.142-.169.193-.339.218-.63.072-1.332-.667-2.222-1.168-3.111-2.695-.266-.456.266-.423.762-1.417.083-.169.041-.318-.021-.444-.063-.127-.542-1.306-.743-1.787-.196-.47-.41-.406-.562-.413-.146-.007-.313-.008-.48-.008-.167 0-.438.063-.667.313-.229.25-1.17 1.144-1.17 2.79 0 1.646 1.198 3.238 1.365 3.46.167.221 2.358 3.599 5.712 5.048.798.344 1.422.55 1.908.706.802.254 1.533.218 2.11.134.644-.093 1.727-.706 1.972-1.39.245-.683.245-1.27.172-1.39-.073-.121-.266-.192-.559-.338z"/>
+                            </svg>
+                            WhatsApp Us
+                        </a>
                         <a href="tel:+923251510459" className="flex items-center gap-3 py-3 px-4 bg-cyan-600 text-white rounded-xl font-bold justify-center shadow-lg hover:bg-cyan-700 transition-colors">
                             <Phone size={20} />
                             Call Us Now
