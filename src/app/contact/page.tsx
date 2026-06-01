@@ -152,7 +152,7 @@ export default function ContactPage() {
                             </div>
                         </div>
 
-                        {/* 
+                        {/*
                         <div className="rounded-2xl border border-border/40 bg-gradient-to-br from-background/40 to-background/20 p-6 backdrop-blur-xl shadow-lg">
                             <div className="flex items-center gap-4">
                                 <MapPin className="h-6 w-6 text-primary" />
@@ -162,7 +162,6 @@ export default function ContactPage() {
                                 </div>
                             </div>
                         </div>
-                        */}
 
                         {/* Socials */}
                         <div className="flex gap-6 pt-4">

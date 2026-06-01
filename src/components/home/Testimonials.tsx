@@ -4,7 +4,7 @@ import { Quote } from 'lucide-react';
 export default function Testimonials() {
     const testimonials = [
         {
-            quote: "I am regular at APT and I move and walk because of them. Dr Anas is young, strong and knowledgeable doctor. He has excellent sense of humor and is very very considerate. Worth visiting if you have mobility issues.",
+            quote: "I am regular at Revix Physiocare and I move and walk because of them. Dr Anas is young, strong and knowledgeable doctor. He has excellent sense of humor and is very very considerate. Worth visiting if you have mobility issues.",
             author: 'Ayaz Khan',
 
         },
