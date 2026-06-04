@@ -137,7 +137,7 @@ export default function ContactPage() {
                                 <Mail className="h-6 w-6 text-primary" />
                                 <div>
                                     <p className="text-sm text-muted-foreground">Email us</p>
-                                    <p className="font-medium">support@revixphysiocare.com</p>
+                                    <p className="font-medium">revixphysio@gmail.com</p>
                                 </div>
                             </div>
                         </div>
