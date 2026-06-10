@@ -180,7 +180,7 @@ export default function Navbar({ conditions, services }: NavbarProps) {
             {/* Desktop Menu Row */}
             <div className={`hidden md:flex justify-center border-t bg-card transition-all duration-300 ${scrolledState ? 'border-t-0' : 'border-t'}`}>
                 <NavigationMenu>
-                    <NavigationMenuList className="gap-2 md:gap-8">
+                    <NavigationMenuList className="gap-2 md:gap-6 lg:gap-8">
                         {menuItems.slice(0, 2).map((item, index) => (
                             <NavigationMenuItem key={index}>
                                 <NavigationMenuLink asChild>
@@ -201,11 +201,11 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                             <NavigationMenuTrigger className={`
                                 font-medium transition-colors hover:text-cyan-500 bg-transparent data-[state=open]:text-cyan-500
                                 ${scrolledState ? 'py-3 text-sm' : 'py-4 text-base'}
-                                ${pathname.startsWith("/services") ? 'text-cyan-500 border-b-2 border-cyan-500' : 'text-foreground'}
+                                ${pathname === "/services" || (pathname.startsWith("/services") && !pathname.includes("home-visit")) ? 'text-cyan-500 border-b-2 border-cyan-500' : 'text-foreground'}
                             `}>
                                 Services
                             </NavigationMenuTrigger>
-                            <ServicesDropdownContent services={services} />
+                            <ServicesDropdownContent services={services.filter(s => !s.title.toLowerCase().includes('home visit'))} />
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
@@ -217,6 +217,25 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                                 What do we treat
                             </NavigationMenuTrigger>
                             <TreatmentDropdownContent conditions={conditions} />
+                        </NavigationMenuItem>
+
+                        <NavigationMenuItem>
+                            <NavigationMenuLink asChild>
+                                <Link href="/services/home-visit-physiotherapy"
+                                    className={`
+                                        flex items-center gap-2 font-bold transition-all duration-300 rounded-full
+                                        ${scrolledState ? 'py-1.5 px-4 text-sm' : 'py-2 px-5 text-base'}
+                                        bg-cyan-50 text-cyan-700 hover:bg-cyan-500 hover:text-white hover:shadow-md border border-cyan-200 hover:border-cyan-500
+                                        ${pathname.includes('home-visit') ? 'bg-cyan-500 text-white shadow-md border-cyan-500' : ''}
+                                    `}
+                                >
+                                    Home Visit
+                                    <span className="relative flex h-2.5 w-2.5">
+                                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+                                    </span>
+                                </Link>
+                            </NavigationMenuLink>
                         </NavigationMenuItem>
 
                         {menuItems.slice(3).map((item, index) => (
@@ -272,6 +291,18 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                             </Link>
                         ))}
 
+                        {/* Spotlight Home Visit Mobile Link */}
+                        <Link
+                            href="/services/home-visit-physiotherapy"
+                            className="flex items-center justify-between py-3 px-4 rounded-lg font-bold text-white bg-gradient-to-r from-cyan-500 to-cyan-600 shadow-md transform transition-transform active:scale-95 my-2"
+                        >
+                            <span>Home Visit Physio</span>
+                            <span className="flex h-3 w-3 relative">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                            </span>
+                        </Link>
+
                         {/* Collapsible Services */}
                         <div className="py-2">
                             <button
@@ -286,7 +317,7 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                             </button>
                             {activeMobileSection === 'services' && (
                                 <div className="pl-4 mt-1 space-y-1">
-                                    {services.map((s) => (
+                                    {services.filter(s => !s.title.toLowerCase().includes('home visit')).map((s) => (
                                         <Link key={s.slug} href={`/services/${s.slug}`} className="block py-2.5 px-4 text-sm text-gray-600 hover:text-cyan-600 transition-colors">
                                             {s.title}
                                         </Link>

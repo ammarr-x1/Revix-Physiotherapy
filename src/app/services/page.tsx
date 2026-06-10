@@ -46,7 +46,7 @@ export default async function ServicesPage() {
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-                            {services.map((service) => (
+                            {services.filter(s => !s.title.toLowerCase().includes('home visit')).map((service) => (
                                 <div
                                     key={service.slug}
                                     className="group bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
