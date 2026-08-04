@@ -32,16 +32,31 @@ export async function generateMetadata({ params }: ServicesPageProps): Promise<M
     const { slug } = await params;
     const service = await getServiceBySlug(slug);
 
-    if (!service) return { title: 'Service Not Found' };
+    if (!service) return { title: 'Service Not Found', robots: { index: false } };
+
+    const pageTitle = `${service.title}`;
+    const pageDescription = service.description ?? `Professional ${service.title} at Revix Physio Care in Islamabad. Book your appointment today.`;
+    const pageUrl = `https://revixphysiotherapy.com/services/${slug}`;
 
     return {
-        title: `${service.title} | Revix Physiotherapy`,
-        description: service.description,
+        title: pageTitle,
+        description: pageDescription,
+        keywords: [service.title, 'physiotherapy islamabad', 'physio care', service.slug],
+        alternates: { canonical: pageUrl },
         openGraph: {
-            title: service.hero_title,
-            description: service.description,
+            title: `${service.hero_title ?? service.title} | Revix Physio Care`,
+            description: pageDescription,
+            url: pageUrl,
+            images: [
+                { url: service.hero_image, width: 1200, height: 630, alt: service.title },
+            ],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: `${service.title} | Revix Physio Care`,
+            description: pageDescription,
             images: [service.hero_image],
-        }
+        },
     };
 }
 

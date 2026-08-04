@@ -4,9 +4,25 @@ import type { Metadata } from 'next';
 import { getServices } from '@/queries/services';
 
 export const metadata: Metadata = {
-    title: 'Our Physiotherapy Services | Revix Physical Therapy',
+    title: 'Our Physiotherapy Services',
     description:
-        'Explore our range of professional physiotherapy services including General Physiotherapy, Aged Care, NDIS, and Corporate Wellness solutions.',
+        'Explore professional physiotherapy services at Revix Physio Care in Islamabad — General Physiotherapy, Sports Rehabilitation, Home Visits, and more.',
+    alternates: { canonical: 'https://revixphysiotherapy.com/services' },
+    openGraph: {
+        title: 'Our Physiotherapy Services | Revix Physio Care',
+        description:
+            'Explore our range of professional physiotherapy services including General Physiotherapy, Sports Rehabilitation, and Home Visit Physio in Islamabad.',
+        url: 'https://revixphysiotherapy.com/services',
+        images: [
+            { url: '/revix1.png', width: 1200, height: 630, alt: 'Revix Physiotherapy Services' },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Our Physiotherapy Services | Revix Physio Care',
+        description: 'Professional physiotherapy services in Islamabad & Rawalpindi.',
+        images: ['/revix1.png'],
+    },
 };
 
 export const revalidate = 86400; // 24h

@@ -1,35 +1,43 @@
 import { MetadataRoute } from 'next';
-import { createBrowserClient } from '@supabase/ssr';
+import { createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://revixphysiotherapy.com';
 
-    const supabase = createBrowserClient(
+    const cookieStore = await cookies();
+    const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        { cookies: { getAll: () => cookieStore.getAll() } }
     );
 
-    // Fetch dynamic routes
-    const { data: services } = await supabase.from('services').select('slug').eq('is_active', true);
-    const { data: conditions } = await supabase.from('treatable_conditions').select('slug');
+    const [{ data: services }, { data: conditions }] = await Promise.all([
+        supabase.from('services').select('slug, updated_at').eq('is_active', true),
+        supabase.from('treatable_conditions').select('slug, updated_at'),
+    ]);
 
-    const serviceUrls = (services ?? []).map((s) => ({
+    const serviceUrls: MetadataRoute.Sitemap = (services ?? []).map((s) => ({
         url: `${baseUrl}/services/${s.slug}`,
-        lastModified: new Date(),
+        lastModified: s.updated_at ? new Date(s.updated_at) : new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.7,
     }));
 
-    const conditionUrls = (conditions ?? []).map((c) => ({
+    const conditionUrls: MetadataRoute.Sitemap = (conditions ?? []).map((c) => ({
         url: `${baseUrl}/what-do-we-treat/${c.slug}`,
-        lastModified: new Date(),
+        lastModified: c.updated_at ? new Date(c.updated_at) : new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.6,
     }));
 
     return [
-        { url: baseUrl, lastModified: new Date() },
-        { url: `${baseUrl}/about`, lastModified: new Date() },
-        { url: `${baseUrl}/services`, lastModified: new Date() },
-        { url: `${baseUrl}/what-do-we-treat`, lastModified: new Date() },
-        { url: `${baseUrl}/contact`, lastModified: new Date() },
-        { url: `${baseUrl}/faqs`, lastModified: new Date() },
+        { url: baseUrl,                                   lastModified: new Date(), changeFrequency: 'weekly',   priority: 1.0 },
+        { url: `${baseUrl}/about`,                        lastModified: new Date(), changeFrequency: 'monthly',  priority: 0.8 },
+        { url: `${baseUrl}/services`,                     lastModified: new Date(), changeFrequency: 'weekly',   priority: 0.9 },
+        { url: `${baseUrl}/what-do-we-treat`,             lastModified: new Date(), changeFrequency: 'weekly',   priority: 0.9 },
+        { url: `${baseUrl}/contact`,                      lastModified: new Date(), changeFrequency: 'monthly',  priority: 0.8 },
+        { url: `${baseUrl}/faqs`,                         lastModified: new Date(), changeFrequency: 'monthly',  priority: 0.7 },
         ...serviceUrls,
         ...conditionUrls,
     ];

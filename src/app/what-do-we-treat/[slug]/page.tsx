@@ -23,15 +23,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const condition = await getTreatableConditionBySlug(slug);
 
-    if (!condition) return { title: 'Condition Not Found' };
+    if (!condition) return { title: 'Condition Not Found', robots: { index: false } };
+
+    const pageTitle = condition.hero_title;
+    const pageDescription = `Revix Physio Care provides expert physiotherapy for ${condition.hero_title} in Islamabad & Rawalpindi. Evidence-based treatment for long-term recovery.`;
+    const pageUrl = `https://revixphysiotherapy.com/what-do-we-treat/${slug}`;
 
     return {
-        title: `${condition.hero_title} | Revix Physiotherapy`,
-        description: `Learn more about our professional treatment for ${condition.hero_title}. Expert physiotherapy solutions for long-term recovery.`,
+        title: pageTitle,
+        description: pageDescription,
+        keywords: [condition.hero_title, 'physiotherapy islamabad', 'physio care', slug],
+        alternates: { canonical: pageUrl },
         openGraph: {
-            title: condition.hero_title,
+            title: `${condition.hero_title} | Revix Physio Care`,
+            description: pageDescription,
+            url: pageUrl,
+            images: [
+                { url: condition.hero_image, width: 1200, height: 630, alt: condition.hero_title },
+            ],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: `${condition.hero_title} | Revix Physio Care`,
+            description: pageDescription,
             images: [condition.hero_image],
-        }
+        },
     };
 }
 

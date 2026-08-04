@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { Mail, Phone, Menu, X, ChevronDown, ChevronRight } from "lucide-react"
+import { Mail, Phone, Menu, X, ChevronDown, ChevronRight, Home, Bot } from "lucide-react"
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -166,6 +166,16 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                 </div>
 
                 <div className="hidden md:flex items-center justify-end gap-6 text-sm text-gray-600 mt-2 md:mt-0">
+                    <Link href="/services/home-visit-physiotherapy"
+                        className={`
+                            flex items-center gap-2 font-semibold transition-all duration-300 rounded-full shadow-sm py-1.5 px-4
+                            bg-cyan-600 text-white hover:bg-cyan-700 hover:-translate-y-0.5
+                            ${pathname.includes('home-visit') ? 'ring-2 ring-cyan-600 ring-offset-2' : ''}
+                        `}
+                    >
+                        <Home size={16} className="mr-1" />
+                        Home Visit
+                    </Link>
                     <div className="flex items-center gap-2 hover:text-cyan-600 transition-colors">
                         <Mail size={16} />
                         <a href="mailto:revixphysio@gmail.com">Email Us</a>
@@ -219,21 +229,18 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                             <TreatmentDropdownContent conditions={conditions} />
                         </NavigationMenuItem>
 
+
+
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
-                                <Link href="/services/home-visit-physiotherapy"
+                                <Link href="/symptom-checker"
                                     className={`
-                                        flex items-center gap-2 font-bold transition-all duration-300 rounded-full
-                                        ${scrolledState ? 'py-1.5 px-4 text-sm' : 'py-2 px-5 text-base'}
-                                        bg-cyan-50 text-cyan-700 hover:bg-cyan-500 hover:text-white hover:shadow-md border border-cyan-200 hover:border-cyan-500
-                                        ${pathname.includes('home-visit') ? 'bg-cyan-500 text-white shadow-md border-cyan-500' : ''}
+                                        flex items-center gap-1.5 font-medium transition-colors hover:text-cyan-500
+                                        ${scrolledState ? 'py-3 text-sm' : 'py-4 text-base'}
+                                        ${pathname === '/symptom-checker' ? 'text-cyan-500 border-b-2 border-cyan-500' : 'text-foreground'}
                                     `}
                                 >
-                                    Home Visit
-                                    <span className="relative flex h-2.5 w-2.5">
-                                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
-                                    </span>
+                                    AI Checker
                                 </Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
@@ -294,13 +301,24 @@ export default function Navbar({ conditions, services }: NavbarProps) {
                         {/* Spotlight Home Visit Mobile Link */}
                         <Link
                             href="/services/home-visit-physiotherapy"
-                            className="flex items-center justify-between py-3 px-4 rounded-lg font-bold text-white bg-gradient-to-r from-cyan-500 to-cyan-600 shadow-md transform transition-transform active:scale-95 my-2"
+                            className="flex items-center justify-between py-3 px-4 rounded-lg font-semibold text-cyan-700 bg-cyan-50 border border-cyan-100 shadow-sm transition-colors hover:bg-cyan-100 my-2"
                         >
-                            <span>Home Visit Physio</span>
-                            <span className="flex h-3 w-3 relative">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-                            </span>
+                            <div className="flex items-center gap-2">
+                                <Home size={20} className="text-cyan-600" />
+                                <span>Home Visit Physio</span>
+                            </div>
+                            <ChevronRight size={20} className="text-cyan-500" />
+                        </Link>
+
+                        {/* AI Symptom Checker Mobile Link */}
+                        <Link
+                            href="/symptom-checker"
+                            className={`flex items-center justify-between py-3 px-4 rounded-lg font-semibold transition-colors ${pathname === '/symptom-checker' ? 'bg-cyan-50 text-cyan-600' : 'text-gray-700 hover:bg-gray-50'}`}
+                        >
+                            <div className="flex items-center gap-2">
+                                <span>AI Symptom Checker</span>
+                            </div>
+                            <ChevronRight size={20} className="text-cyan-400" />
                         </Link>
 
                         {/* Collapsible Services */}

@@ -5,9 +5,25 @@ import { getTreatableConditions } from '@/queries/treatable-conditions';
 import { formatSlug } from '@/lib/formatSlug';
 
 export const metadata: Metadata = {
-    title: 'What Do We Treat | Revix Physical Therapy',
+    title: 'Conditions We Treat',
     description:
-        'Browse all conditions treated at Revix Physiotherapy — from headaches and spine pain to sports injuries and post-surgical rehabilitation.',
+        'Browse all conditions treated at Revix Physio Care — from headaches and spine pain to sports injuries and post-surgical rehabilitation in Islamabad.',
+    alternates: { canonical: 'https://revixphysiotherapy.com/what-do-we-treat' },
+    openGraph: {
+        title: 'Conditions We Treat | Revix Physio Care',
+        description:
+            'Expert physiotherapy for a wide range of musculoskeletal and neurological conditions in Islamabad & Rawalpindi.',
+        url: 'https://revixphysiotherapy.com/what-do-we-treat',
+        images: [
+            { url: '/revix1.png', width: 1200, height: 630, alt: 'Conditions treated at Revix Physio Care' },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Conditions We Treat | Revix Physio Care',
+        description: 'Expert physiotherapy for sports injuries, back pain, and more in Islamabad.',
+        images: ['/revix1.png'],
+    },
 };
 
 export const revalidate = 86400;

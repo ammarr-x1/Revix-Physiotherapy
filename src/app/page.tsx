@@ -1,9 +1,32 @@
+import type { Metadata } from 'next';
 import AboutUs from '@/components/about/AboutUs';
 import Hero from '@/components/home/Hero';
 import OurServices from '@/components/OurServices';
 import OurTeam from '@/components/about/OurTeam';
 import AppointmentForm from '@/components/AppointmentForm';
 import Testimonials from '@/components/home/Testimonials';
+
+export const metadata: Metadata = {
+  title: 'Revix Physiotherapy | Pain Management & Rehabilitation in Islamabad',
+  description:
+    'Revix Physio Care provides expert physiotherapy, pain management, sports rehabilitation, and home visit services in Islamabad & Rawalpindi. Book your appointment today.',
+  alternates: { canonical: 'https://revixphysiotherapy.com' },
+  openGraph: {
+    title: 'Revix Physiotherapy | Pain Management & Rehabilitation in Islamabad',
+    description:
+      'Expert physiotherapy and rehabilitation services in Islamabad & Rawalpindi. Book your appointment today.',
+    url: 'https://revixphysiotherapy.com',
+    images: [
+      { url: '/revix1.png', width: 1200, height: 630, alt: 'Revix Physiotherapy Clinic' },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Revix Physiotherapy | Pain Management & Rehabilitation',
+    description: 'Expert physiotherapy services in Islamabad & Rawalpindi.',
+    images: ['/revix1.png'],
+  },
+};
 
 export default function Home() {
   const jsonLd = {
